@@ -30,7 +30,7 @@ jobs:
 
       # Install NodeJS
       - name: Install Node
-        uses: actions/checkout@v4
+        uses: actions/setup-node@v4
         with:
           Node-version: '17.x'
 
@@ -43,7 +43,9 @@ jobs:
       # Run Collection
       - name: Run Collection
         run: |
-          newman run "Entrust API/RESTAPIs-Entrust.postman_collection(FINAL).json" -e "Entrust API/RESTQA2_48_Edit.postman_environment.json" -r htmlextra --reporter- htmlextra-export SampleArtifact/report.html
+          newman run "Entrust API/RESTAPIs-Entrust.postman_collection(FINAL).json" \
+          -e "Entrust API/RESTQA2_48_Edit.postman_environment.json" \
+          -r htmlextra --reporter-htmlextra-export SampleArtifact/report.html
       # Publish the Report
       - name: Publish Report
         uses: actions/upload-artifact@v4
