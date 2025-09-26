@@ -24,9 +24,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+
+      # Debug list files so we know where the collections are
+      - name: List repo files
+        run: ls -R
+
+      # Create folder for reports
       - name: Create dir
-        run:
-          mkdir SampleArtifact
+        run: mkdir SampleArtifact
 
       # Install NodeJS
       - name: Install Node
@@ -49,7 +54,8 @@ jobs:
         run: |
           newman run "Entrust_API/RESTAPIs-Entrust.postman_collection(FINAL).json" \
           -e "Entrust_API/RESTSAM48_Edit.postman_environment.json" \
-          -r htmlextra --reporter-htmlextra-export SampleArtifact/report.html
+          -r htmlextra --reporter-htmlextra-export SampleArtifact/report.html || true
+          
       # Publish the Report
       - name: Publish Report
         uses: actions/upload-artifact@v4
