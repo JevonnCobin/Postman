@@ -35,8 +35,8 @@ jobs:
           Node-version: 18
 
       # Install Dependencies
-      - name: install dependencies
-        run: npm ci
+      # - name: install dependencies
+      #  run: npm ci
         
       # Install Newman & Reporter
       - name: Install Newman
